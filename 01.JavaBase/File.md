@@ -534,3 +534,57 @@ public class RunProgram4 {
 
 ```
 
+#### 2.2.2 字符输出流
+
+类：FileWriter
+
+步骤：
+
+创建字符输出流对象
+
+​	如果文件不存在，则创建
+
+​	如果文件存在，则清空
+
+写数据
+
+​	写int类型的整数，实际写出的是整数对应的字母
+
+​	写字符串数据的话，就把字符串本身写出
+
+释放资源
+
+方法：
+
+| 方法名                                     | 说明                                                     |
+| ------------------------------------------ | -------------------------------------------------------- |
+| void write(int c)                          | 写入一个字符                                             |
+| void write(char[] cbuf)                    | 写入一个字符数组                                         |
+| void write(char[] cbuf ,int off , int len) | 写入一个字符数组的一部分                                 |
+| void write(String str)                     | 写入一个字符串                                           |
+| void write(String str,int off,int len)     | 写入一个字符串的一部分                                   |
+| flush()                                    | 刷新流，还可以继续写入数据                               |
+| close()                                    | 关闭流，关闭之前会先刷新流，一旦关闭后，就不能再写数据了 |
+
+```java
+import java.io.File;
+import java.io.FileWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RunProgram1 {
+
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		// TODO Auto-generated method stub
+		String str = "你好，こんにちは\n爱我中华";
+		File file = new File("abc.txt");
+		try (FileWriter writer = new FileWriter(file,true)) {
+			writer.write(str);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+}
+
+```
+
