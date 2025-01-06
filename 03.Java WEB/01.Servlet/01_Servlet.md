@@ -190,4 +190,51 @@ public class CharacterEncodingFilter implements Filter {
 
 ```
 
-## 6.监听器 - Litener
+## 6.Servlet 初始化参数
+
+### 6.1 Servlet初始化参数
+
+每个Servlet允许设置自己的初始化参数，并且在servlet加载的过程中获取出来并使用。
+
+通常情况下会将servlet要用到的配置内容存放在此。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <servlet>
+  	<servlet-name>IndexAction01</servlet-name>
+  	<servlet-class>com.zx.action.IndexAction01</servlet-class>
+  	<init-param>
+  		<param-name>Encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>IndexAction01</servlet-name>
+  	<url-pattern>/IndexAction01.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
+```java
+public class IndexAction01 extends HttpServlet {
+	
+	private String encoding ; 
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		this.encoding = config.getInitParameter("Encoding");
+	}
+	
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println(this.encoding);
+	}
+}
+```
+
+### 6.2 全局初始化参数
+
+## 7.监听器 - Litener
