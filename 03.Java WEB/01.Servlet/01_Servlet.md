@@ -274,3 +274,37 @@ public class IndexAction01 extends HttpServlet {
 
 
 ## 7.监听器 - Litener
+
+Servlet监听器是可以监听ServletContext,HttpSession,HttpRequest域对象的创建和销毁过程，以及监听这些域对象属性的修改。
+
+Serlvet监听器概述
+
+在监听过程中会涉及几个重要部分
+
+1.事件：用户的一个操作，比如点击一个按钮，调用一个方法
+
+2.事件源：产生事件的对象
+
+3.事件监听器：负责监听发生在事件源上的事件
+
+4.事件处理器：监听器的成员方法，当事件发生时会触发对应的处理器
+
+
+
+监听器工作时，可以分为几步：
+
+1.将监听器绑定到事件源，也就是注册监听器
+
+2.事件发生时会触发监听器的成员方法
+
+3.事件处理器通过事件对象获得事件源，并对事件进行处理
+
+
+
+根据监听事件不同，监听器可以分为三类
+
+1.用于监听域对象创建和销毁的事件监听器（ServletContextListener接口，HttpSessionListener接口，ServletRequestListener接口）
+
+2.用于监听域对象属性增加或属性删除的监听器（ServletContextAttributeListener接口，HttpSessionAttributeListener接口，ServletRequestAttributeListener接口）
+
+3.用于监听绑定到HttpSession域中某个对象状态的事件监听器（HttpSessionBindingListener接口，HttpSessionActivationListener接口）
