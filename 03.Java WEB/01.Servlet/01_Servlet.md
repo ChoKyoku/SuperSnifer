@@ -237,4 +237,40 @@ public class IndexAction01 extends HttpServlet {
 
 ### 6.2 全局初始化参数
 
+上面所提到的初始化参数是针对每一个servlet，如果想创建一个全局的初始化参数的话，也就是所有的servlet包括过滤器都能用的就需要用到
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <context-param>
+  	<param-name>Encoding</param-name>
+  	<param-value>ShiftJIS</param-value>
+  </context-param>
+</web-app>
+```
+
+```java
+package com.zx.action;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class IndexAction01 extends HttpServlet { 
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String encoding = request.getServletContext().getInitParameter("Encoding");
+		System.out.println(encoding);
+	}
+}
+
+```
+
+
+
 ## 7.监听器 - Litener
