@@ -18,7 +18,13 @@ Maven的核心功能便是通过xml标签的形式来合理叙述项目间的依
 
 ​	Maven定义了标准的项目结构，规定了源代码、资源文件、测试代码等目录的布局方式。这使得不同IDE（如Eclipse、IntelliJ IDEA）之间可以共享和识别相同的项目结构，简化了项目之间的迁移和协作。‌
 
-3.
+3.构建流程
+
+​	Maven提供了一套标准化的项目构建流程。通过执行Maven命令，可以进行项目的编译、测试、打包、部署等一系列操作。这种标准化的构建流程确保了项目的一致性和可重复性，提高了开发效率。‌
+
+4.仓库管理
+
+​	Maven使用仓库来存储和管理依赖库。仓库分为本地仓库、第三方仓库和中央仓库。本地仓库用于存储从远程仓库或中央仓库下载的插件和jar包，第三方仓库通常由公司内部设立，用于公司内部的构建协作和存档，而中央仓库则是公开可访问的仓库。‌通过这些功能，Maven极大地简化了Java项目的开发和管理过程，提高了开发效率和项目的可维护性。
 
 
 
@@ -677,13 +683,13 @@ POM（Project Object Model，项目对象模型）是Maven的基本组件，它�
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gzl.cn</groupId>
-	<artifactId>helloMaven</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion> <!-- 模型版本 -->
+	<groupId>com.gzl.cn</groupId> <!-- 公司或者组织的唯一标识 -->
+	<artifactId>helloMaven</artifactId><!-- 项目的唯一ID -->
+	<version>0.0.1-SNAPSHOT</version><!-- 版本号 -->
 	<name>helloMaven</name>
 	<description>Demo project for Spring Boot</description>
-	<packaging>jar</packaging>
+	<packaging>jar</packaging> <!-- 打包方式，jar/pom/war -->
 </project>
 
 ```
@@ -695,7 +701,31 @@ POM（Project Object Model，项目对象模型）是Maven的基本组件，它�
 - **name：** name只是一个名称，项目的全名称，可以是大写空格多个词，比如Spring Boot Starter Parent，而artifactId是用来区分同一个groupId下的子项目，一般实际使用中，会把name的值赋成和artifactId一样的。
 - **description：** 对当前项目的描述
 - **packaging：** 项目的打包方式，默认值为 jar。有三个可选值：jar、war、pom
-- **url：** 提供examlie网站展示的项目说明
+
+
+
+依赖管理和添加
+
+```xml
+<dependencies>
+    <!-- 引入具体的依赖包 -->
+	<dependency>
+    	<groupId></groupId>
+        <artifactId></artifactId>
+        <version></version>
+        <!-- 
+			生效范围
+			 -compile
+			 -provided
+			 -runtime
+			 -test
+		-->
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
+```
+
+
 
 ## 6.创建Maven项目
 
