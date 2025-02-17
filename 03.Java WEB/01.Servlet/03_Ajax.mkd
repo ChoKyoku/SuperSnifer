@@ -65,6 +65,8 @@ JSON.stringify() ,将JS对象转换为string字符串
 
 #### 3.3.1 将JSON字符串转换为Java对象
 
+**将单个对象转换为Java对象**
+
 语法：使用ObjectMapper类型提供的 readValue(String value,Class classType)方法
 
 注意：目标类中必须要提供无参的构造函数，否则会报异常。
@@ -120,6 +122,30 @@ class Person {
 	}
 
 }
+```
+
+**将列表字符串转换为Java List**
+
+语法：通过ObjectMapper提供的readValue(str,new TypeReference<List<类型>>(){});
+
+```java
+String jsonStrList = "[{\"id\":1,\"name\":\"a\",\"age\":15,\"gender\":\"M\"},{\"id\":2,\"name\":\"a\",\"age\":15,\"gender\":\"M\"}]";
+List<Person> listPerson = mapper.readValue(jsonStrList, new TypeReference<List<Person>>() {});
+System.out.println(listPerson);
+```
+
+**将字符串转换为Map**
+
+语法：通过ObjectMapper提供的readValue(str,new TypeReference<Map<String,Object>>(){});
+
+```java
+public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
+		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "{\"name\":\"sanfeng.zhang\",\"hobby\":\"drink\"}";
+		Map<String,String> map = mapper.readValue(json, new TypeReference<Map<String,String>>(){});
+		System.out.println(map.get("name"));
+	}
 ```
 
 #### 3.3.2 将Java对象转换为JSON字符串
@@ -191,6 +217,22 @@ class Person {
 	}
 }
 ```
+
+```java
+public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
+		// TODO Auto-generated method stub
+		Person person1 = new Person(1,"sf",28,"M");
+		Person person2 = new Person(2,"zm",16,"F");
+		List<Person> list = new ArrayList<Person>();
+		list.add(person1);
+		list.add(person2);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		System.out.println(jsonStr);
+	}
+```
+
+
 
 ## 4.jQuery实现Ajax
 
